@@ -650,7 +650,9 @@
   .info-card{ grid-column:span 4; min-height:190px; height:100%; padding:28px; border:1px solid rgba(255,255,255,.16); border-radius:8px; background:rgba(28,33,25,.72); box-shadow:0 14px 36px rgba(0,0,0,.18); backdrop-filter:blur(5px); display:flex; flex-direction:column; }
   .portfolio-body .card.info-card{ position:relative; left:auto; top:auto; width:auto; height:100%; border-radius:8px; }
   .portfolio-body .info-card{ will-change:scale,box-shadow; transition:opacity .8s var(--ease-out),transform .9s var(--ease-out),scale .7s var(--ease-out),box-shadow .7s var(--ease-out),background .7s var(--ease-out); }
-  .portfolio-body .info-card:hover{ scale:1.06; background:rgba(42,50,37,.92); box-shadow:0 38px 86px rgba(0,0,0,.60),0 0 42px rgba(169,202,138,.18); }
+  .portfolio-body .info-card:hover{ position:relative; z-index:10; scale:1.06; background:rgba(42,50,37,.92); box-shadow:0 38px 86px rgba(0,0,0,.60),0 0 42px rgba(169,202,138,.18); }
+  .portfolio-body .info-card.wide{ transform-origin:left center; }
+  .portfolio-body .info-card.wide:hover{ scale:1.02; }
   .info-card.wide{ grid-column:span 8; }
   .info-card.full{ grid-column:1/-1; }
   .info-card h3{ margin:9px 0 12px; color:#fff; font-size:22px; line-height:1.15; font-weight:400; }
