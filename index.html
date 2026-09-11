@@ -323,7 +323,8 @@
     position:absolute;
     background:var(--card); border-radius:calc(46 * var(--u));
     box-shadow:0 calc(30 * var(--u)) calc(70 * var(--u)) rgba(16,21,13,.30);
-    transition:box-shadow .8s var(--ease);
+    will-change:scale,box-shadow;
+    transition:scale .48s var(--ease-out),box-shadow .48s var(--ease-out),background .48s var(--ease-out);
   }
   /* No z-index here on purpose. z-index:auto keeps the card out of its own
      stacking context, so the body paints under #scene (the moss drapes over
@@ -416,7 +417,7 @@
   .card--stove .knob{ width:calc(54 * var(--u)); height:calc(54 * var(--u)); right:calc(26 * var(--u)); bottom:calc(26 * var(--u)); }
   .card .knob svg, .knob--about svg{ width:calc(19 * var(--u)); height:calc(19 * var(--u)); display:block; color:#3f453a; }
   .card .knob:hover, .knob--about:hover{ transform:scale(1.1) rotate(8deg); background:#fff; }
-  .card:hover{ box-shadow:0 calc(38 * var(--u)) calc(84 * var(--u)) rgba(16,21,13,.36); }
+  .card:hover{ scale:1.06; box-shadow:0 calc(50 * var(--u)) calc(112 * var(--u)) rgba(8,12,6,.58),0 0 calc(34 * var(--u)) rgba(167,196,136,.16); }
 
   /* ── scroll cue (z 4) ────────────────────────────────────────────────── */
   .scroll{
@@ -648,6 +649,8 @@
   .section-grid{ display:grid; grid-template-columns:repeat(12,1fr); gap:16px; align-items:stretch; }
   .info-card{ grid-column:span 4; min-height:190px; height:100%; padding:28px; border:1px solid rgba(255,255,255,.16); border-radius:8px; background:rgba(28,33,25,.72); box-shadow:0 14px 36px rgba(0,0,0,.18); backdrop-filter:blur(5px); display:flex; flex-direction:column; }
   .portfolio-body .card.info-card{ position:relative; left:auto; top:auto; width:auto; height:100%; border-radius:8px; }
+  .portfolio-body .info-card{ will-change:scale,box-shadow; transition:opacity .8s var(--ease-out),transform .9s var(--ease-out),scale .7s var(--ease-out),box-shadow .7s var(--ease-out),background .7s var(--ease-out); }
+  .portfolio-body .info-card:hover{ scale:1.06; background:rgba(42,50,37,.92); box-shadow:0 38px 86px rgba(0,0,0,.60),0 0 42px rgba(169,202,138,.18); }
   .info-card.wide{ grid-column:span 8; }
   .info-card.full{ grid-column:1/-1; }
   .info-card h3{ margin:9px 0 12px; color:#fff; font-size:22px; line-height:1.15; font-weight:400; }
@@ -662,11 +665,11 @@
   .portfolio-footer{ padding:28px 34px; background:#383b34; color:rgba(255,255,255,.6); font-size:12px; letter-spacing:1px; text-align:center; }
   .portfolio-body::before{ display:none; }
   .js .portfolio-section .section-head,
-  .js .portfolio-section .info-card{ opacity:0; transform:translate3d(var(--reveal-x,0),32px,0); transition:opacity .8s var(--ease-out),transform .9s var(--ease-out); }
+  .js .portfolio-section .info-card{ opacity:0; transform:translate3d(var(--reveal-x,0),32px,0); transition:opacity .8s var(--ease-out),transform .9s var(--ease-out),scale .48s var(--ease-out),box-shadow .48s var(--ease-out),background .48s var(--ease-out); }
   .js .portfolio-section.is-visible .section-head,
   .js .portfolio-section.is-visible .info-card{ opacity:1; transform:translate3d(0,0,0); }
   .js .portfolio-section .info-card.mask{ clip-path:inset(100% 0 0 0 round 8px); }
-  .js .portfolio-section.is-visible .info-card.mask{ clip-path:inset(0 0 0 0 round 8px); transition:clip-path 1.05s var(--ease-out) var(--d,0ms),opacity .8s var(--ease-out),transform .9s var(--ease-out); }
+  .js .portfolio-section.is-visible .info-card.mask{ clip-path:inset(0 0 0 0 round 8px); transition:clip-path 1.05s var(--ease-out) var(--d,0ms),opacity .8s var(--ease-out),transform .9s var(--ease-out),scale .48s var(--ease-out),box-shadow .48s var(--ease-out),background .48s var(--ease-out); }
   .js .portfolio-section .section-head{ --reveal-x:-42px; }
   .js .portfolio-section .info-card:nth-child(odd){ --reveal-x:-58px; }
   .js .portfolio-section .info-card:nth-child(even){ --reveal-x:58px; }
@@ -805,19 +808,19 @@
       <div><dt>Skills</dt><dd>Agentic AI</dd></div>
     </dl>
 
-    <article class="card card--stove mask" id="work" style="--d:880ms; --pd:22; --pr:2.4">
+    <article class="card card--stove mask" id="work" data-project-url="https://crop-recommendation-using-ai-ml.onrender.com/" role="link" tabindex="0" style="--d:880ms; --pd:22; --pr:2.4">
       <p class="label">Selected work</p>
       <h2>Fieldwise<br><small>recommendation model</small></h2>
       <figure class="portal" data-delay="1080">
         <span class="portal-media"><img src="sylva-assets/card-ecostove.webp" alt="Placeholder project image" loading="eager" decoding="async"></span>
         <canvas class="pixel-reveal" aria-hidden="true"></canvas>
       </figure>
-      <button class="knob" data-scroll-target="#work-section" aria-label="Open selected project">
+      <a class="knob" href="https://crop-recommendation-using-ai-ml.onrender.com/" target="_blank" rel="noreferrer" aria-label="Open Fieldwise crop recommendation project">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
           <path d="M12 21v-7"/><path d="M12 14c0-3.3 2.4-6 5.5-6 .3 3.6-2.2 6.4-5.5 6Z"/>
           <path d="M12 16c-.1-2.9-2.2-5.2-4.9-5.2C6.8 13.7 9 16 12 16Z"/>
         </svg>
-      </button>
+      </a>
     </article>
 
     <a class="scroll mask" style="--d:1040ms; --pd:9" href="#work-section">View work<span class="track"></span></a>
@@ -864,14 +867,14 @@
       <article class="card info-card mask par" style="--d:180ms; --pd:11; --pr:1"><p class="section-kicker">AI / ML</p><h3>Intelligence</h3><div class="tag-list"><span class="tag">Machine Learning</span><span class="tag">Deep Learning</span><span class="tag">NLP</span><span class="tag">Generative AI</span><span class="tag">Computer Vision</span><span class="tag">RAG</span><span class="tag">LLMs</span></div></article>
       <article class="card info-card mask par" style="--d:260ms; --pd:12; --pr:1"><p class="section-kicker">Build</p><h3>Libraries & tools</h3><div class="tag-list"><span class="tag">TensorFlow</span><span class="tag">PyTorch</span><span class="tag">Scikit-learn</span><span class="tag">Git</span><span class="tag">Jupyter</span><span class="tag">VS Code</span></div></article>
       <article class="card info-card full mask par" style="--d:340ms; --pd:13; --pr:1.1"><p class="section-kicker">Embedded systems & strengths</p><p>Arduino UNO, sensor interfacing, data acquisition, IoT systems, Linux, Windows, leadership, teamwork, problem solving, public speaking, and time management.</p></article>
-      <article class="card info-card wide mask par" style="--d:420ms; --pd:14; --pr:1.2"><p class="section-kicker">Certification</p><h3>Career Essentials in Generative AI</h3><p>Microsoft and LinkedIn Learning. Covered Generative AI, large language models, prompt engineering, responsible AI, and AI-powered productivity tools.</p></article>
+      <article class="card info-card full mask par" style="--d:420ms; --pd:14; --pr:1.2"><p class="section-kicker">Certification</p><h3>Career Essentials in Generative AI</h3><p>Microsoft and LinkedIn Learning. Covered Generative AI, large language models, prompt engineering, responsible AI, and AI-powered productivity tools.</p></article>
     </div>
   </section>
 
   <section class="portfolio-section" id="contact-section">
-    <div class="section-head"><div><p class="section-kicker">07 / Contact</p><h2 class="section-title">Let’s make the next idea tangible.</h2></div><p class="section-intro">For collaboration, project conversations, or simply a thoughtful technical exchange.</p></div>
+    <div class="section-head"><div><p class="section-kicker">05 / Contact</p><h2 class="section-title">Let’s make the next idea tangible.</h2></div><p class="section-intro">For collaboration, project conversations, or simply a thoughtful technical exchange.</p></div>
     <div class="contact-grid">
-      <div class="info-card full"><p class="section-kicker">Reach me</p><a class="contact-link" href="mailto:subhasish_ug_24@ei.nits.ac.in">subhasish_ug_24@ei.nits.ac.in</a><a class="contact-link" href="https://github.com/Subhasish-Saikia" target="_blank" rel="noreferrer">GitHub / Subhasish-Saikia</a><a class="contact-link" href="https://www.linkedin.com/in/subhasish-saikia-4046a92aa/" target="_blank" rel="noreferrer">LinkedIn / Subhasish Saikia</a></div>
+      <article class="card info-card full mask par" style="--d:120ms; --pd:12; --pr:1.1"><p class="section-kicker">Reach me</p><a class="contact-link" href="mailto:subhasish_ug_24@ei.nits.ac.in">subhasish_ug_24@ei.nits.ac.in</a><a class="contact-link" href="https://github.com/Subhasish-Saikia" target="_blank" rel="noreferrer">GitHub / Subhasish-Saikia</a><a class="contact-link" href="https://www.linkedin.com/in/subhasish-saikia-4046a92aa/" target="_blank" rel="noreferrer">LinkedIn / Subhasish Saikia</a></article>
     </div>
   </section>
   <nav class="portfolio-section section-index" aria-label="Portfolio sections">
@@ -1402,6 +1405,16 @@
   }
 
   function initPortfolioLinks() {
+    var projectCard = document.querySelector('[data-project-url]');
+    if (projectCard) {
+      function openProject() { window.open(projectCard.getAttribute('data-project-url'), '_blank', 'noopener,noreferrer'); }
+      projectCard.addEventListener('click', function (e) {
+        if (!e.target.closest('a')) openProject();
+      });
+      projectCard.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openProject(); }
+      });
+    }
     var musicTrigger = document.querySelector('.music-trigger');
     var youtubeAudio = document.querySelector('.youtube-audio');
     if (musicTrigger && youtubeAudio) {
